@@ -4,6 +4,7 @@ export default function App() {
   const [tema, setTema] = useState("");
   const [musica, setMusica] = useState("");
   const [loading, setLoading] = useState(false);
+  const [premium, setPremium] = useState(false);
 
   function criarMusica() {
     if (!tema) return;
@@ -12,21 +13,41 @@ export default function App() {
     setMusica("");
 
     setTimeout(() => {
-      setMusica(`🎵 Título: Canção de ${tema}
+      if (premium) {
+        setMusica(`🎵 Título Premium: Canção de ${tema}
 
-[Verso]
-No silêncio eu encontrei
-Uma força pra seguir
-Cada sonho que guardei
-Hoje volta a existir
+[Verso 1]
+No silêncio da noite eu ouvi
+Os sonhos chamando por mim
+Cada estrela parecia dizer
+Que ainda existe um novo amanhecer
+
+[Pré-refrão]
+Mesmo quando o medo aparecer
+A esperança vai me fortalecer
 
 [Refrão]
-${tema}, luz no meu caminho
-${tema}, força no coração
-Mesmo quando eu estiver sozinho
-Vai nascer uma nova canção 🎶`);
+${tema}, luz do meu coração
+Força viva em cada canção
+Mesmo longe eu vou acreditar
+Que os sonhos podem voltar
+
+[Ponte]
+Nada vai apagar
+A chama que ficou
+MusicAI criou
+E o impossível começou 🎶`);
+      } else {
+        setMusica(`🎵 Música grátis sobre ${tema}
+
+[Verso]
+Hoje eu vou cantar
+Sobre ${tema}
+Com emoção no coração 🎶`);
+      }
+
       setLoading(false);
-    }, 1800);
+    }, 1500);
   }
 
   return (
@@ -37,174 +58,92 @@ Vai nascer uma nova canção 🎶`);
           "radial-gradient(circle at top, #2b0036 0%, #090909 60%)",
         color: "white",
         fontFamily: "Arial",
-        overflow: "hidden",
+        padding: "40px",
+        textAlign: "center",
       }}
     >
-      {/* HEADER */}
-      <div
+      <h1 style={{ color: "#ff2d78", fontSize: "55px" }}>
+        🎵 MusicAI
+      </h1>
+
+      <p>Crie músicas com inteligência artificial</p>
+
+      <button
+        onClick={() => setPremium(!premium)}
         style={{
-          padding: "30px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          background: premium ? "#ffd700" : "#222",
+          color: premium ? "#111" : "white",
+          border: "none",
+          padding: "12px 20px",
+          borderRadius: "12px",
+          marginBottom: "25px",
+          fontWeight: "bold",
+          cursor: "pointer",
         }}
       >
-        <h1
-          style={{
-            color: "#ff2d78",
-            fontSize: "38px",
-            margin: 0,
-          }}
-        >
-          🎵 MusicAI
-        </h1>
+        {premium ? "⭐ Premium Ativado" : "🔒 Ativar Premium"}
+      </button>
 
-        <button
-          style={{
-            background: "rgba(255,255,255,0.1)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            color: "white",
-            padding: "10px 18px",
-            borderRadius: "12px",
-          }}
-        >
-          Premium
-        </button>
-      </div>
+      <br />
 
-      {/* HERO */}
-      <div
+      <input
+        value={tema}
+        onChange={(e) => setTema(e.target.value)}
+        placeholder="Digite um tema..."
         style={{
-          textAlign: "center",
-          padding: "40px 20px",
+          padding: "16px",
+          width: "320px",
+          borderRadius: "14px",
+          border: "none",
+        }}
+      />
+
+      <br />
+      <br />
+
+      <button
+        onClick={criarMusica}
+        style={{
+          background: "#ff2d78",
+          color: "white",
+          border: "none",
+          padding: "16px 30px",
+          borderRadius: "14px",
+          fontSize: "18px",
+          fontWeight: "bold",
         }}
       >
-        <h2
-          style={{
-            fontSize: "65px",
-            marginBottom: "10px",
-            lineHeight: "1.1",
-          }}
-        >
-          Crie músicas
-          <br />
-          com IA 🎶
-        </h2>
+        ✨ Criar música
+      </button>
 
-        <p
-          style={{
-            color: "#bbb",
-            fontSize: "20px",
-            marginBottom: "40px",
-          }}
-        >
-          Gere letras incríveis em segundos
-        </p>
+      {loading && (
+        <div style={{ marginTop: "30px" }}>
+          ⏳ Criando música...
+        </div>
+      )}
 
-        {/* INPUT */}
+      {musica && (
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "10px",
-            flexWrap: "wrap",
+            marginTop: "40px",
+            background: "rgba(255,255,255,0.08)",
+            padding: "30px",
+            borderRadius: "24px",
+            maxWidth: "850px",
+            marginInline: "auto",
+            textAlign: "left",
           }}
         >
-          <input
-            value={tema}
-            onChange={(e) => setTema(e.target.value)}
-            placeholder="Digite um tema..."
+          <pre
             style={{
-              width: "320px",
-              padding: "18px",
-              borderRadius: "16px",
-              border: "none",
-              background: "rgba(255,255,255,0.1)",
-              color: "white",
-              fontSize: "16px",
-              outline: "none",
-              backdropFilter: "blur(10px)",
-            }}
-          />
-
-          <button
-            onClick={criarMusica}
-            style={{
-              background: "#ff2d78",
-              border: "none",
-              color: "white",
-              padding: "18px 26px",
-              borderRadius: "16px",
-              fontSize: "17px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              boxShadow: "0 0 25px rgba(255,45,120,0.5)",
+              whiteSpace: "pre-wrap",
+              lineHeight: "1.8",
             }}
           >
-            ✨ Criar
-          </button>
+            {musica}
+          </pre>
         </div>
-
-        {/* LOADING */}
-        {loading && (
-          <div
-            style={{
-              marginTop: "35px",
-              fontSize: "18px",
-              color: "#ff2d78",
-            }}
-          >
-            ⏳ Criando música...
-          </div>
-        )}
-
-        {/* RESULTADO */}
-        {musica && (
-          <div
-            style={{
-              marginTop: "40px",
-              maxWidth: "850px",
-              marginInline: "auto",
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "28px",
-              padding: "30px",
-              backdropFilter: "blur(12px)",
-              textAlign: "left",
-            }}
-          >
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(musica);
-                alert("🎵 Música copiada!");
-              }}
-              style={{
-                background: "white",
-                color: "#111",
-                border: "none",
-                padding: "10px 16px",
-                borderRadius: "12px",
-                fontWeight: "bold",
-                cursor: "pointer",
-                marginBottom: "20px",
-              }}
-            >
-              📋 Copiar música
-            </button>
-
-            <pre
-              style={{
-                whiteSpace: "pre-wrap",
-                lineHeight: "1.9",
-                fontSize: "17px",
-                color: "#fff",
-              }}
-            >
-              {musica}
-            </pre>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }
