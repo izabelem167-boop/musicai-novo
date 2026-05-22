@@ -13,7 +13,109 @@ export default function App() {
     setMusica("");
 
     setTimeout(() => {
-      if (premium) {
+      if (premium) {  onClick={() => window.open("SEU_LINK_STRIPE")}
+  style={{
+    background: premium ? "#ffd700" : "#222",
+    color: premium ? "#111" : "white",
+    border: "none",
+    padding: "12px 20px",
+    borderRadius: "12px",
+    marginBottom: "25px",
+    fontWeight: "bold",
+    cursor: "pointer",
+  }}
+>
+  ⭐ Desbloquear Premium — 4,99€
+</button>
+AGORA:
+
+Substitua:
+
+SEU_LINK_STRIPE
+
+pelo link do seu pagamento Stripe.
+
+Exemplo:
+
+https://buy.stripe.com/xxxxx
+O QUE VAI ACONTECER
+
+Quando a pessoa clicar:
+
+abre o checkout Stripe
+paga
+desbloqueia Premium
+DICA PARA VENDER MAIS
+
+No TikTok faça vídeos tipo:
+
+“Essa IA cria músicas em segundos 😳”
+
+e coloque o link do MusicAI na bio 😄🚀
+
+COMO FAÇO 
+
+Vamos fazer o Stripe funcionar 😄🔥
+
+PASSO 1 — Criar link de pagamento
+Entre em:
+Stripe Dashboard
+Vá em:
+Payment Links
+Clique:
+Create payment link
+Produto:
+MusicAI Premium
+Preço:
+4,99€
+Clique:
+Create link
+
+Depois o Stripe vai gerar algo tipo:
+
+https://buy.stripe.com/xxxxxx
+PASSO 2 — Colocar no app
+
+No GitHub → src/App.jsx
+
+Procure:
+
+onClick={() => setPremium(!premium)}
+
+E troque por:
+
+onClick={() => window.open("COLE_SEU_LINK_STRIPE_AQUI")}
+EXEMPLO
+onClick={() => window.open("https://buy.stripe.com/abc123")}
+RESULTADO 😄
+
+Quando clicarem:
+
+⭐ Desbloquear Premium
+
+vai abrir o pagamento Stripe 💳🔥
+
+https://buy.stripe.com/test_7sYbJ12NG16y4K76Zh9R600
+
+Perfeito 😭🔥
+
+Agora no src/App.jsx:
+
+Procure isto:
+
+onClick={() => setPremium(!premium)}
+
+E troque por:
+
+onClick={() => window.open("https://buy.stripe.com/test_7sYbJ12NG16y4K76Zh9R600")}
+
+Depois:
+
+Commit changes
+Espera o Vercel atualizar
+Testa o botão ⭐ Premium
+
+Agora quando clicarem vai abrir o checkout Stripe 💳🚀
         setMusica(`🎵 Título Premium: Canção de ${tema}
 
 [Verso 1]
