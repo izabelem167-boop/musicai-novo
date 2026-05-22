@@ -5,99 +5,82 @@ export default function App() {
   const [musica, setMusica] = useState("");
 
   function criarMusica() {
-    setMusica(`🎵 Música sobre: ${tema}
+    if (!tema) return;
 
-Verso:
-Hoje eu vou cantar
-Sobre ${tema}
-Com emoção no coração
+    setMusica(`🎵 Título: Canção de ${tema}
 
-Refrão:
-MusicAI chegou
-E a inspiração começou 🎶`);
+[Verso 1]
+No silêncio eu encontrei
+Uma força pra seguir
+Cada sonho que guardei
+Hoje volta a existir
+
+[Pré-refrão]
+E quando o mundo tentar me parar
+Eu vou lembrar do que me faz continuar
+
+[Refrão]
+${tema}, luz no meu caminho
+${tema}, força no coração
+Mesmo quando eu estiver sozinho
+Vai nascer uma nova canção
+
+[Verso 2]
+Cada lágrima virou
+Uma estrela a brilhar
+E a esperança me ensinou
+Que eu posso recomeçar
+
+[Final]
+MusicAI criou
+E a emoção ficou 🎶`);
   }
 
   return (
-    <div
-      style={{
-        background: "linear-gradient(to bottom, #111, #1e1e1e)",
-        color: "white",
-        minHeight: "100vh",
-        padding: "40px",
-        fontFamily: "Arial",
-        textAlign: "center",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: "60px",
-          marginBottom: "10px",
-          color: "#ff2d78",
-        }}
-      >
-        🎵 MusicAI
-      </h1>
-
-      <p style={{ color: "#aaa", marginBottom: "40px" }}>
-        Crie músicas com inteligência artificial
-      </p>
+    <div style={{
+      background: "linear-gradient(135deg, #090909, #2b0036)",
+      color: "white",
+      minHeight: "100vh",
+      padding: "40px",
+      fontFamily: "Arial",
+      textAlign: "center"
+    }}>
+      <h1 style={{ fontSize: "55px", color: "#ff2d78" }}>🎵 MusicAI</h1>
+      <p>Crie letras de músicas com inteligência artificial</p>
 
       <input
         value={tema}
         onChange={(e) => setTema(e.target.value)}
-        placeholder="Digite um tema..."
-        style={{
-          padding: "15px",
-          width: "300px",
-          borderRadius: "12px",
-          border: "none",
-          fontSize: "16px",
-          outline: "none",
-        }}
+        placeholder="Ex: amor de mãe, fé, saudade..."
+        style={{ padding: "15px", width: "320px", borderRadius: "12px", border: "none" }}
       />
 
-      <br />
-      <br />
+      <br /><br />
 
-      <button
-        onClick={criarMusica}
-        style={{
-          background: "#ff2d78",
-          color: "white",
-          border: "none",
-          padding: "15px 30px",
-          borderRadius: "12px",
-          fontSize: "18px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
-        ✨ Criar música
+      <button onClick={criarMusica} style={{
+        background: "#ff2d78",
+        color: "white",
+        border: "none",
+        padding: "15px 30px",
+        borderRadius: "12px",
+        fontSize: "18px",
+        fontWeight: "bold"
+      }}>
+        ✨ Criar música completa
       </button>
 
       {musica && (
-        <div
-          style={{
-            marginTop: "40px",
-            background: "#222",
-            padding: "25px",
-            borderRadius: "20px",
-            maxWidth: "700px",
-            marginInline: "auto",
-            textAlign: "left",
-            lineHeight: "1.8",
-          }}
-        >
-          <pre
-            style={{
-              whiteSpace: "pre-wrap",
-              fontFamily: "Arial",
-              color: "#fff",
-            }}
-          >
-            {musica}
-          </pre>
-        </div>
+        <pre style={{
+          marginTop: "35px",
+          background: "rgba(255,255,255,0.1)",
+          padding: "25px",
+          borderRadius: "20px",
+          maxWidth: "750px",
+          marginInline: "auto",
+          whiteSpace: "pre-wrap",
+          textAlign: "left",
+          lineHeight: "1.7"
+        }}>{musica}</pre>
       )}
     </div>
   );
