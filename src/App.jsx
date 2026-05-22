@@ -5,7 +5,12 @@ export default function App() {
   const [tema, setTema] = useState("");
   const [genero, setGenero] = useState("");
   const [estilo, setEstilo] = useState("");
-  const [resultado, setResultado] = useState(false);
+  const [mostrar, setMostrar] = useState(false);
+
+  const imagem =
+    genero === "Feminino"
+      ? "https://api.dicebear.com/7.x/lorelei/png?seed=" + personagem
+      : "https://api.dicebear.com/7.x/adventurer/png?seed=" + personagem;
 
   function criarArtista() {
     if (!personagem || !tema || !genero || !estilo) {
@@ -13,28 +18,28 @@ export default function App() {
       return;
     }
 
-    setResultado(true);
+    setMostrar(true);
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "radial-gradient(circle at top, #2b0036 0%, #090909 60%)", color: "white", fontFamily: "Arial", padding: "40px", textAlign: "center" }}>
-      <h1 style={{ color: "#ff2d78", fontSize: "60px" }}>🎵 MusicAI</h1>
+    <div style={{ background: "#111", color: "white", minHeight: "100vh", padding: 40, textAlign: "center", fontFamily: "Arial" }}>
+      <h1>🎵 MusicAI</h1>
       <p>Crie seu artista virtual com IA do seu jeito</p>
 
-      <input value={personagem} onChange={(e) => setPersonagem(e.target.value)} placeholder="Nome do personagem" style={{ padding: "16px", width: "320px", borderRadius: "14px", border: "none", marginBottom: "15px" }} />
-      <br />
+      <input placeholder="Nome do personagem" value={personagem} onChange={(e) => setPersonagem(e.target.value)} />
+      <br /><br />
 
-      <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Tema da música" style={{ padding: "16px", width: "320px", borderRadius: "14px", border: "none", marginBottom: "15px" }} />
-      <br />
+      <input placeholder="Tema da música" value={tema} onChange={(e) => setTema(e.target.value)} />
+      <br /><br />
 
-      <select value={genero} onChange={(e) => setGenero(e.target.value)} style={{ padding: "16px", width: "355px", borderRadius: "14px", border: "none", marginBottom: "15px" }}>
+      <select value={genero} onChange={(e) => setGenero(e.target.value)}>
         <option value="">Escolha o gênero</option>
         <option>Feminino</option>
         <option>Masculino</option>
       </select>
-      <br />
+      <br /><br />
 
-      <select value={estilo} onChange={(e) => setEstilo(e.target.value)} style={{ padding: "16px", width: "355px", borderRadius: "14px", border: "none", marginBottom: "20px" }}>
+      <select value={estilo} onChange={(e) => setEstilo(e.target.value)}>
         <option value="">Escolha o estilo</option>
         <option>Gospel</option>
         <option>Pop</option>
@@ -42,44 +47,22 @@ export default function App() {
         <option>Sertanejo</option>
         <option>Funk</option>
       </select>
-      <br />
+      <br /><br />
 
-      <button onClick={criarArtista} style={{ background: "#ff2d78", color: "white", border: "none", padding: "16px 30px", borderRadius: "14px", fontSize: "18px", fontWeight: "bold", cursor: "pointer" }}>
-        ✨ Criar artista IA
-      </button>
+      <button onClick={criarArtista}>✨ Criar artista IA</button>
 
-      {resultado && (
-        <div style={{ marginTop: "40px", background: "rgba(255,255,255,0.08)", padding: "30px", borderRadius: "24px", maxWidth: "850px", marginInline: "auto", textAlign: "left" }}>
-          <img
-            src={
-              genero === "Feminino"
-                ? `https://api.dicebear.com/7.x/lorelei/png?seed=${personagem}`
-                : `https://api.dicebear.com/7.x/adventurer/png?seed=${personagem}`
-            }
-            alt="personagem"
-            style={{ width: "180px", borderRadius: "20px", display: "block", marginBottom: "20px", background: "white" }}
-          />
+      {mostrar && (
+        <div style={{ marginTop: 30 }}>
+          <img src={imagem} alt="personagem" style={{ width: 180, background: "white", borderRadius: 20 }} />
 
-          <pre style={{ whiteSpace: "pre-wrap", lineHeight: "1.8" }}>
-{`🎭 Personagem IA: ${personagem}
+          <h2>🎭 Personagem IA: {personagem}</h2>
+          <p>👤 Gênero: {genero}</p>
+          <p>🎵 Estilo: {estilo}</p>
+          <p>🎶 Música sobre: {tema}</p>
 
-👤 Gênero: ${genero}
-
-🎵 Estilo Musical:
-${estilo}
-
-🎶 Música:
-${tema}
-
-[Verso]
-No silêncio eu encontrei
-Uma força pra seguir
-
-[Refrão]
-${tema}, luz no meu coração
-Com estilo ${estilo}
-Vai nascer uma nova canção 🎶`}
-          </pre>
+          <p>
+            {tema}, luz no meu coração, com estilo {estilo}, vai nascer uma nova canção 🎶
+          </p>
         </div>
       )}
     </div>
