@@ -17,19 +17,43 @@ export default function App() {
       alert("Preencha tudo primeiro.");
       return;
     }
-
     setMostrar(true);
   }
 
   return (
-    <div style={{ background: "#111", color: "white", minHeight: "100vh", padding: 40, textAlign: "center", fontFamily: "Arial" }}>
-      <h1>🎵 MusicAI</h1>
+    <div style={{
+      minHeight: "100vh",
+      background: "radial-gradient(circle at top, #2b0036 0%, #090909 60%)",
+      color: "white",
+      fontFamily: "Arial",
+      padding: "40px",
+      textAlign: "center"
+    }}>
+      <h1 style={{ color: "#ff2d78", fontSize: "60px" }}>🎵 MusicAI</h1>
       <p>Crie seu artista virtual com IA do seu jeito</p>
 
-      <input placeholder="Nome do personagem" value={personagem} onChange={(e) => setPersonagem(e.target.value)} />
+      <button
+        onClick={() => window.open("https://buy.stripe.com/test_7sYbJ12NG16y4K76Zh9R600")}
+        style={{
+          background: "#ffd700",
+          color: "#111",
+          border: "none",
+          padding: "12px 20px",
+          borderRadius: "12px",
+          marginBottom: "25px",
+          fontWeight: "bold",
+          cursor: "pointer"
+        }}
+      >
+        ⭐ Desbloquear Premium — 4,99€
+      </button>
+
+      <br />
+
+      <input value={personagem} onChange={(e) => setPersonagem(e.target.value)} placeholder="Nome do personagem" />
       <br /><br />
 
-      <input placeholder="Tema da música" value={tema} onChange={(e) => setTema(e.target.value)} />
+      <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Tema da música" />
       <br /><br />
 
       <select value={genero} onChange={(e) => setGenero(e.target.value)}>
@@ -49,20 +73,35 @@ export default function App() {
       </select>
       <br /><br />
 
-      <button onClick={criarArtista}>✨ Criar artista IA</button>
+      <button onClick={criarArtista} style={{
+        background: "#ff2d78",
+        color: "white",
+        border: "none",
+        padding: "16px 30px",
+        borderRadius: "14px",
+        fontSize: "18px",
+        fontWeight: "bold",
+        cursor: "pointer"
+      }}>
+        ✨ Criar artista IA
+      </button>
 
       {mostrar && (
-        <div style={{ marginTop: 30 }}>
+        <div style={{
+          marginTop: "40px",
+          background: "rgba(255,255,255,0.08)",
+          padding: "30px",
+          borderRadius: "24px",
+          maxWidth: "850px",
+          marginInline: "auto"
+        }}>
           <img src={imagem} alt="personagem" style={{ width: 180, background: "white", borderRadius: 20 }} />
 
           <h2>🎭 Personagem IA: {personagem}</h2>
           <p>👤 Gênero: {genero}</p>
           <p>🎵 Estilo: {estilo}</p>
           <p>🎶 Música sobre: {tema}</p>
-
-          <p>
-            {tema}, luz no meu coração, com estilo {estilo}, vai nascer uma nova canção 🎶
-          </p>
+          <p>{tema}, luz no meu coração, com estilo {estilo}, vai nascer uma nova canção 🎶</p>
         </div>
       )}
     </div>
