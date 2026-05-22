@@ -153,6 +153,18 @@ Vai nascer uma nova canção 🎶`);
             textAlign: "left",
           }}
         >
+          <img
+            src={`https://api.dicebear.com/7.x/adventurer/png?seed=${personagem}`}
+            alt="personagem"
+            style={{
+              width: "180px",
+              borderRadius: "20px",
+              display: "block",
+              marginBottom: "20px",
+              background: "white",
+            }}
+          />
+
           <pre
             style={{
               whiteSpace: "pre-wrap",
