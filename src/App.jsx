@@ -2,46 +2,34 @@ import { useState } from "react";
 
 export default function App() {
   const [tema, setTema] = useState("");
-  const [musica, setMusica] = useState("");
+  const [personagem, setPersonagem] = useState("");
+  const [resultado, setResultado] = useState("");
   const [loading, setLoading] = useState(false);
-  const [premium, setPremium] = useState(false);
 
-  function criarMusica() {
-    if (!tema) return;
+  function criarTudo() {
+    if (!tema || !personagem) return;
 
     setLoading(true);
-    setMusica("");
+    setResultado("");
 
     setTimeout(() => {
-      if (premium) {
-        setMusica(`🎵 Título Premium: Canção de ${tema}
+      setResultado(`🎭 Personagem: ${personagem}
 
-[Verso 1]
-No silêncio da noite eu ouvi
-Os sonhos chamando por mim
-Cada estrela parecia dizer
-Que ainda existe um novo amanhecer
+✨ Estilo:
+Cantor(a) futurista com visual moderno neon.
 
-[Pré-refrão]
-Mesmo quando o medo aparecer
-A esperança vai me fortalecer
-
-[Refrão]
-${tema}, luz do meu coração
-Força viva em cada canção
-Mesmo longe eu vou acreditar
-Que os sonhos podem voltar 🎶`);
-      } else {
-        setMusica(`🎵 Música grátis sobre ${tema}
+🎵 Música:
+Título: Canção de ${tema}
 
 [Verso]
-Hoje eu vou cantar
-Sobre ${tema}
-Com emoção no coração 🎶`);
-      }
+No silêncio eu encontrei
+Uma força pra seguir
 
+[Refrão]
+${tema}, luz no meu coração
+Vai nascer uma nova canção 🎶`);
       setLoading(false);
-    }, 1500);
+    }, 1800);
   }
 
   return (
@@ -56,38 +44,31 @@ Com emoção no coração 🎶`);
         textAlign: "center",
       }}
     >
-      <h1 style={{ color: "#ff2d78", fontSize: "55px" }}>
+      <h1 style={{ color: "#ff2d78", fontSize: "60px" }}>
         🎵 MusicAI
       </h1>
 
-      <p>Crie músicas com inteligência artificial</p>
+      <p>Crie músicas e personagens com IA</p>
 
-      <button
-        onClick={() =>
-          window.open(
-            "https://buy.stripe.com/test_7sYbJ12NG16y4K76Zh9R600"
-          )
-        }
+      <input
+        value={personagem}
+        onChange={(e) => setPersonagem(e.target.value)}
+        placeholder="Nome do personagem..."
         style={{
-          background: "#ffd700",
-          color: "#111",
+          padding: "16px",
+          width: "320px",
+          borderRadius: "14px",
           border: "none",
-          padding: "12px 20px",
-          borderRadius: "12px",
-          marginBottom: "25px",
-          fontWeight: "bold",
-          cursor: "pointer",
+          marginBottom: "15px",
         }}
-      >
-        ⭐ Desbloquear Premium — 4,99€
-      </button>
+      />
 
       <br />
 
       <input
         value={tema}
         onChange={(e) => setTema(e.target.value)}
-        placeholder="Digite um tema..."
+        placeholder="Tema da música..."
         style={{
           padding: "16px",
           width: "320px",
@@ -100,7 +81,7 @@ Com emoção no coração 🎶`);
       <br />
 
       <button
-        onClick={criarMusica}
+        onClick={criarTudo}
         style={{
           background: "#ff2d78",
           color: "white",
@@ -109,18 +90,19 @@ Com emoção no coração 🎶`);
           borderRadius: "14px",
           fontSize: "18px",
           fontWeight: "bold",
+          cursor: "pointer",
         }}
       >
-        ✨ Criar música
+        ✨ Criar artista IA
       </button>
 
       {loading && (
         <div style={{ marginTop: "30px" }}>
-          ⏳ Criando música...
+          ⏳ Criando personagem...
         </div>
       )}
 
-      {musica && (
+      {resultado && (
         <div
           style={{
             marginTop: "40px",
@@ -138,7 +120,7 @@ Com emoção no coração 🎶`);
               lineHeight: "1.8",
             }}
           >
-            {musica}
+            {resultado}
           </pre>
         </div>
       )}
