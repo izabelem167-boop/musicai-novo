@@ -4,23 +4,27 @@ export default function App() {
   const [personagem, setPersonagem] = useState("");
   const [tema, setTema] = useState("");
   const [estilo, setEstilo] = useState("");
+  const [genero, setGenero] = useState("");
   const [resultado, setResultado] = useState("");
   const [loading, setLoading] = useState(false);
 
   function criarTudo() {
-    if (!tema || !personagem || !estilo) return;
+    if (!tema || !personagem || !estilo || !genero) return;
 
     setLoading(true);
     setResultado("");
 
     setTimeout(() => {
-      setResultado(`🎭 Personagem: ${personagem}
+      setResultado(`🎭 Personagem IA criado do seu jeito: ${personagem}
+
+👤 Gênero:
+${genero}
 
 🎵 Estilo Musical:
 ${estilo}
 
 ✨ Descrição:
-Artista virtual estilo ${estilo}, com visual moderno e presença forte.
+Artista virtual ${genero.toLowerCase()} estilo ${estilo}, com visual moderno e presença forte.
 
 🎶 Música:
 Título: ${tema}
@@ -55,7 +59,7 @@ Vai nascer uma nova canção 🎵`);
         🎵 MusicAI
       </h1>
 
-      <p>Crie artistas virtuais com IA</p>
+      <p>Crie seu artista virtual com IA do seu jeito</p>
 
       <input
         value={personagem}
@@ -84,6 +88,24 @@ Vai nascer uma nova canção 🎵`);
           marginBottom: "15px",
         }}
       />
+
+      <br />
+
+      <select
+        value={genero}
+        onChange={(e) => setGenero(e.target.value)}
+        style={{
+          padding: "16px",
+          width: "355px",
+          borderRadius: "14px",
+          border: "none",
+          marginBottom: "15px",
+        }}
+      >
+        <option value="">Escolha o gênero</option>
+        <option>Feminino</option>
+        <option>Masculino</option>
+      </select>
 
       <br />
 
