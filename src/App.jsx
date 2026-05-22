@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 export default function App() {
-  const [tema, setTema] = useState("");
   const [personagem, setPersonagem] = useState("");
+  const [tema, setTema] = useState("");
+  const [estilo, setEstilo] = useState("");
   const [resultado, setResultado] = useState("");
   const [loading, setLoading] = useState(false);
 
   function criarTudo() {
-    if (!tema || !personagem) return;
+    if (!tema || !personagem || !estilo) return;
 
     setLoading(true);
     setResultado("");
@@ -15,19 +16,25 @@ export default function App() {
     setTimeout(() => {
       setResultado(`🎭 Personagem: ${personagem}
 
-✨ Estilo:
-Cantor(a) futurista com visual moderno neon.
+🎵 Estilo Musical:
+${estilo}
 
-🎵 Música:
-Título: Canção de ${tema}
+✨ Descrição:
+Artista virtual estilo ${estilo}, com visual moderno e presença forte.
+
+🎶 Música:
+Título: ${tema}
 
 [Verso]
 No silêncio eu encontrei
 Uma força pra seguir
+Cada sonho que guardei
+Hoje volta a existir
 
 [Refrão]
 ${tema}, luz no meu coração
-Vai nascer uma nova canção 🎶`);
+Com batidas de ${estilo}
+Vai nascer uma nova canção 🎵`);
       setLoading(false);
     }, 1800);
   }
@@ -48,7 +55,7 @@ Vai nascer uma nova canção 🎶`);
         🎵 MusicAI
       </h1>
 
-      <p>Crie músicas e personagens com IA</p>
+      <p>Crie artistas virtuais com IA</p>
 
       <input
         value={personagem}
@@ -74,10 +81,32 @@ Vai nascer uma nova canção 🎶`);
           width: "320px",
           borderRadius: "14px",
           border: "none",
+          marginBottom: "15px",
         }}
       />
 
       <br />
+
+      <select
+        value={estilo}
+        onChange={(e) => setEstilo(e.target.value)}
+        style={{
+          padding: "16px",
+          width: "355px",
+          borderRadius: "14px",
+          border: "none",
+          marginBottom: "20px",
+        }}
+      >
+        <option value="">Escolha um estilo</option>
+        <option>Gospel</option>
+        <option>Trap</option>
+        <option>Pop</option>
+        <option>Sertanejo</option>
+        <option>Funk</option>
+        <option>TikTok Viral</option>
+      </select>
+
       <br />
 
       <button
@@ -98,7 +127,7 @@ Vai nascer uma nova canção 🎶`);
 
       {loading && (
         <div style={{ marginTop: "30px" }}>
-          ⏳ Criando personagem...
+          ⏳ Criando artista...
         </div>
       )}
 
