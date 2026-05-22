@@ -44,7 +44,7 @@ export default function App() {
       <button
         onClick={() =>
           window.open(
-            "https://app.monetizze.com.br/r/ARR25790286"
+            "https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00"
           )
         }
         style={{
