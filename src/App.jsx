@@ -67,6 +67,19 @@ export default function App() {
           <p>🎵 Estilo: {estilo}</p>
           <p>🎶 Música sobre: {tema}</p>
           <p>{tema}, luz no meu coração, com estilo {estilo}, vai nascer uma nova canção 🎶</p>
+<button
+  onClick={() => {
+    navigator.clipboard.writeText(
+      "Personagem: " + personagem +
+      "\nGênero: " + genero +
+      "\nEstilo: " + estilo +
+      "\nMúsica sobre: " + tema
+    );
+    alert("Copiado!");
+  }}
+>
+  📋 Copiar resultado
+</button>
         </div>
       )}
     </div>
