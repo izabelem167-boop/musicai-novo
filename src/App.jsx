@@ -141,26 +141,36 @@ function App() {
             fontSize: "16px"
           }}>
             {resultado}
-          </pre>
+         <div
+  style={{
+    background: "linear-gradient(135deg,#1a1a1a,#2d0036)",
+    padding: "25px",
+    borderRadius: "22px",
+    boxShadow: "0 0 30px rgba(255,0,150,0.3)",
+    textAlign: "left",
+    marginTop: "20px"
+  }}
+>
+  <h2 style={{ color: "#ff4fd8" }}>
+    🎤 {nome}
+  </h2>
 
-          <button
-            onClick={copiar}
-            style={{
-              background: "white",
-              color: "#111",
-              border: "none",
-              padding: "12px 20px",
-              borderRadius: "12px",
-              fontWeight: "bold",
-              cursor: "pointer"
-            }}
-          >
-            📋 Copiar resultado
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
+  <p>
+    ✨ Estilo: <b>{estilo}</b>
+  </p>
 
-export default App;
+  <p>
+    🎵 Tema: <b>{tema}</b>
+  </p>
+
+  <hr style={{ borderColor: "#444" }} />
+
+  <p style={{ lineHeight: "1.8" }}>
+    No silêncio eu encontrei uma força pra seguir.
+    Cada sonho que guardei hoje volta a existir.
+  </p>
+
+  <p style={{ color: "#ffb3ec", fontWeight: "bold" }}>
+    {tema}, luz no meu coração ✨
+  </p>
+</div>
