@@ -6,7 +6,16 @@ function App() {
   const [estilo, setEstilo] = useState("Gospel");
   const [resultado, setResultado] = useState("");
 
-  const imagem = "https://api.dicebear.com/7.x/lorelei/png?seed=" + nome;
+const imagem =
+  estilo === "Gospel"
+    ? "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800"
+    : estilo === "Trap"
+    ? "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800"
+    : estilo === "Pop"
+    ? "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=800"
+    : estilo === "Funk"
+    ? "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800"
+    : "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800";
 
   function criar() {
     setResultado(
