@@ -6,7 +6,7 @@ function App() {
   const [resultado, setResultado] = useState("");
 
 function criar() {
-  setResultado(
+  setResultado(´
     "🎤 Artista: " + nome +
     "\n🎵 Tema: " + tema +
     "\n✅ Música criada com sucesso!"
