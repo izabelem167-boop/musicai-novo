@@ -35,7 +35,8 @@ const imagem =
       fontFamily: "Arial",
       textAlign: "center"
     }}>
-      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}>🎵 MusicAI Studio</h1>
+      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}
+        >🎵 MusicAI Studio 2.0</h1>
       <p>Crie personagens e músicas com IA</p>
 
       <input placeholder="Nome do personagem" value={nome} onChange={(e) => setNome(e.target.value)} style={campo} />
