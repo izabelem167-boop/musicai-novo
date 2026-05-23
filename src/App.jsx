@@ -3,12 +3,14 @@ import { useState } from "react";
 function App() {
   const [nome, setNome] = useState("");
   const [tema, setTema] = useState("");
+  const [estilo, setEstilo] = useState("Gospel");
   const [resultado, setResultado] = useState("");
 
   function criar() {
     setResultado(
       "🎤 Artista: " + nome +
       "\n🎵 Tema: " + tema +
+      "\n🎶 Estilo: " + estilo +
       "\n✅ Música criada com sucesso!"
     );
   }
@@ -17,16 +19,18 @@ function App() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#111",
+        background: "linear-gradient(135deg, #15001f, #090909)",
         color: "white",
         padding: "40px",
         fontFamily: "Arial",
         textAlign: "center"
       }}
     >
-      <h1 style={{ color: "#ff2d78" }}>
+      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}>
         🎵 MusicAI Studio
       </h1>
+
+      <p>Crie personagens e músicas com IA</p>
 
       <input
         placeholder="Nome do personagem"
@@ -58,6 +62,26 @@ function App() {
 
       <br />
 
+      <select
+        value={estilo}
+        onChange={(e) => setEstilo(e.target.value)}
+        style={{
+          padding: "15px",
+          borderRadius: "12px",
+          border: "none",
+          margin: "10px",
+          width: "320px"
+        }}
+      >
+        <option>Gospel</option>
+        <option>Pop</option>
+        <option>Trap</option>
+        <option>Funk</option>
+        <option>Sertanejo</option>
+      </select>
+
+      <br />
+
       <button
         onClick={criar}
         style={{
@@ -66,7 +90,10 @@ function App() {
           border: "none",
           padding: "18px 40px",
           borderRadius: "14px",
-          cursor: "pointer"
+          fontSize: "18px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          marginTop: "15px"
         }}
       >
         ✨ Criar artista IA
@@ -76,12 +103,12 @@ function App() {
         <pre
           style={{
             marginTop: "30px",
-            background: "#222",
-            padding: "20px",
+            background: "rgba(255,255,255,0.1)",
+            padding: "25px",
             borderRadius: "20px",
-            whiteSpace: "pre-wrap",
-            maxWidth: "600px",
+            maxWidth: "650px",
             marginInline: "auto",
+            whiteSpace: "pre-wrap",
             textAlign: "left"
           }}
         >
