@@ -13,26 +13,81 @@ function App() {
       : "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800";
 
   function criar() {
+    if (!nome || !tema) {
+      alert("Preencha o nome e o tema.");
+      return;
+    }
+
     setResultado(
-      "🎤 Artista: " + nome +
-      "\n👤 Gênero: " + genero +
-      "\n🎵 Tema: " + tema +
-      "\n🎶 Estilo: " + estilo +
-      "\n✅ Música criada com sucesso!"
+`🎤 Artista Virtual: ${nome}
+
+👤 Gênero: ${genero}
+🎵 Estilo Musical: ${estilo}
+✨ Tema principal: ${tema}
+
+📖 Biografia:
+${nome} é um(a) artista virtual criado(a) com inteligência artificial para emocionar, inspirar e criar músicas únicas. Seu estilo mistura ${estilo} com uma presença marcante, perfeita para vídeos, redes sociais e conteúdos virais.
+
+🎶 Música: ${tema}
+
+[Verso 1]
+No silêncio eu encontrei
+Uma força pra seguir
+Cada sonho que guardei
+Hoje volta a existir
+
+[Pré-refrão]
+Mesmo quando a noite vem
+Eu não vou desanimar
+Existe uma luz em mim
+Que nasceu para brilhar
+
+[Refrão]
+${tema}, luz no meu coração
+${tema}, minha inspiração
+Com estilo ${estilo}
+Vai nascer uma nova canção 🎶
+
+[Final]
+E quando o mundo ouvir minha voz
+Vai sentir que não estamos sós`
     );
+  }
+
+  function copiar() {
+    navigator.clipboard.writeText(resultado);
+    alert("Resultado copiado!");
   }
 
   return (
     <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #15001f, #090909)",
+      background: "radial-gradient(circle at top, #3b0050, #090909 65%)",
       color: "white",
       padding: "40px",
       fontFamily: "Arial",
       textAlign: "center"
     }}>
       <h1 style={{ color: "#ff2d78", fontSize: "52px" }}>🎵 MusicAI Studio 2.0</h1>
-      <p>Crie personagens e músicas com IA</p>
+      <p>Crie artistas virtuais, personagens e músicas com IA.</p>
+
+      <button
+        onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")}
+        style={{
+          background: "#ffd700",
+          color: "#111",
+          border: "none",
+          padding: "14px 22px",
+          borderRadius: "14px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          marginBottom: "25px"
+        }}
+      >
+        🚀 Criar artista VIP — 4,99€
+      </button>
+
+      <br />
 
       <input placeholder="Nome do personagem" value={nome} onChange={(e) => setNome(e.target.value)} style={campo} />
       <br />
@@ -52,6 +107,7 @@ function App() {
         <option>Trap</option>
         <option>Funk</option>
         <option>Sertanejo</option>
+        <option>TikTok Viral</option>
       </select>
 
       <br />
@@ -65,33 +121,50 @@ function App() {
         fontSize: "18px",
         fontWeight: "bold",
         cursor: "pointer",
-        marginTop: "15px"
+        marginTop: "15px",
+        boxShadow: "0 0 25px rgba(255,45,120,0.5)"
       }}>
         ✨ Criar artista IA
       </button>
 
       {resultado && (
         <div style={{
-          marginTop: "30px",
+          marginTop: "35px",
           background: "rgba(255,255,255,0.1)",
-          padding: "25px",
-          borderRadius: "20px",
-          maxWidth: "650px",
+          padding: "30px",
+          borderRadius: "24px",
+          maxWidth: "760px",
           marginInline: "auto"
         }}>
           <img src={imagem} alt="" style={{
-            width: "180px",
-            background: "white",
-            borderRadius: "20px",
-            marginBottom: "20px"
+            width: "190px",
+            height: "190px",
+            objectFit: "cover",
+            borderRadius: "24px",
+            marginBottom: "20px",
+            boxShadow: "0 0 30px rgba(255,255,255,0.25)"
           }} />
 
           <pre style={{
             whiteSpace: "pre-wrap",
-            textAlign: "left"
+            textAlign: "left",
+            lineHeight: "1.8",
+            fontSize: "16px"
           }}>
             {resultado}
           </pre>
+
+          <button onClick={copiar} style={{
+            background: "white",
+            color: "#111",
+            border: "none",
+            padding: "12px 20px",
+            borderRadius: "12px",
+            fontWeight: "bold",
+            cursor: "pointer"
+          }}>
+            📋 Copiar resultado
+          </button>
         </div>
       )}
     </div>
