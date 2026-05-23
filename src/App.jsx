@@ -6,6 +6,8 @@ function App() {
   const [estilo, setEstilo] = useState("Gospel");
   const [resultado, setResultado] = useState("");
 
+  const imagem = "https://api.dicebear.com/7.x/lorelei/png?seed=" + nome;
+
   function criar() {
     setResultado(
       "🎤 Artista: " + nome +
@@ -16,63 +18,24 @@ function App() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "linear-gradient(135deg, #15001f, #090909)",
-        color: "white",
-        padding: "40px",
-        fontFamily: "Arial",
-        textAlign: "center"
-      }}
-    >
-      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}>
-        🎵 MusicAI Studio
-      </h1>
-
+    <div style={{
+      minHeight: "100vh",
+      background: "linear-gradient(135deg, #15001f, #090909)",
+      color: "white",
+      padding: "40px",
+      fontFamily: "Arial",
+      textAlign: "center"
+    }}>
+      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}>🎵 MusicAI Studio</h1>
       <p>Crie personagens e músicas com IA</p>
 
-      <input
-        placeholder="Nome do personagem"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
-        style={{
-          padding: "15px",
-          borderRadius: "12px",
-          border: "none",
-          margin: "10px",
-          width: "320px"
-        }}
-      />
-
+      <input placeholder="Nome do personagem" value={nome} onChange={(e) => setNome(e.target.value)} style={campo} />
       <br />
 
-      <input
-        placeholder="Tema da música"
-        value={tema}
-        onChange={(e) => setTema(e.target.value)}
-        style={{
-          padding: "15px",
-          borderRadius: "12px",
-          border: "none",
-          margin: "10px",
-          width: "320px"
-        }}
-      />
-
+      <input placeholder="Tema da música" value={tema} onChange={(e) => setTema(e.target.value)} style={campo} />
       <br />
 
-      <select
-        value={estilo}
-        onChange={(e) => setEstilo(e.target.value)}
-        style={{
-          padding: "15px",
-          borderRadius: "12px",
-          border: "none",
-          margin: "10px",
-          width: "320px"
-        }}
-      >
+      <select value={estilo} onChange={(e) => setEstilo(e.target.value)} style={campo}>
         <option>Gospel</option>
         <option>Pop</option>
         <option>Trap</option>
@@ -82,41 +45,54 @@ function App() {
 
       <br />
 
-      <button
-        onClick={criar}
-        style={{
-          background: "#ff2d78",
-          color: "white",
-          border: "none",
-          padding: "18px 40px",
-          borderRadius: "14px",
-          fontSize: "18px",
-          fontWeight: "bold",
-          cursor: "pointer",
-          marginTop: "15px"
-        }}
-      >
+      <button onClick={criar} style={{
+        background: "#ff2d78",
+        color: "white",
+        border: "none",
+        padding: "18px 40px",
+        borderRadius: "14px",
+        fontSize: "18px",
+        fontWeight: "bold",
+        cursor: "pointer",
+        marginTop: "15px"
+      }}>
         ✨ Criar artista IA
       </button>
 
       {resultado && (
-        <pre
-          style={{
-            marginTop: "30px",
-            background: "rgba(255,255,255,0.1)",
-            padding: "25px",
+        <div style={{
+          marginTop: "30px",
+          background: "rgba(255,255,255,0.1)",
+          padding: "25px",
+          borderRadius: "20px",
+          maxWidth: "650px",
+          marginInline: "auto"
+        }}>
+          <img src={imagem} alt="" style={{
+            width: "180px",
+            background: "white",
             borderRadius: "20px",
-            maxWidth: "650px",
-            marginInline: "auto",
+            marginBottom: "20px"
+          }} />
+
+          <pre style={{
             whiteSpace: "pre-wrap",
             textAlign: "left"
-          }}
-        >
-          {resultado}
-        </pre>
+          }}>
+            {resultado}
+          </pre>
+        </div>
       )}
     </div>
   );
 }
+
+const campo = {
+  padding: "15px",
+  borderRadius: "12px",
+  border: "none",
+  margin: "10px",
+  width: "320px"
+};
 
 export default App;
