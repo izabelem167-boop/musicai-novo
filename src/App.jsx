@@ -5,18 +5,13 @@ function App() {
   const [tema, setTema] = useState("");
   const [resultado, setResultado] = useState("");
 
- function criar() {
-  setResultado(`
-🎤 Artista: ${nome}
-
-🎵 Estilo: Gospel
-
-✨ Tema: ${tema}
-
-📝 Música criada com sucesso!
-`)
+function criar() {
+  setResultado(
+    "🎤 Artista: " + nome +
+    "\n🎵 Tema: " + tema +
+    "\n✅ Música criada com sucesso!"
+  );
 }
-    
 
   return (
     <div style={{
