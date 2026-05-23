@@ -26,7 +26,7 @@ function App() {
 ✨ Tema principal: ${tema}
 
 📖 Biografia:
-${nome} é um(artigo) artista virtual criado(a) com inteligência artificial para emocionar, inspirar e criar músicas únicas. Seu estilo mistura ${estilo} com uma presença marcante, perfeita para vídeos, redes sociais e conteúdos virais.
+${nome} é ${artigo} artista virtual criado(a) com inteligência artificial para emocionar, inspirar e criar músicas únicas. Seu estilo mistura ${estilo} com uma presença marcante, perfeita para vídeos, redes sociais e conteúdos virais.
 
 🎶 Música: ${tema}
 
