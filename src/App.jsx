@@ -7,7 +7,7 @@ function App() {
   const [estilo, setEstilo] = useState("Gospel");
   const [resultado, setResultado] = useState("");
 
-  const imagem =
+  
  const imagem =
   genero === "Feminino"
     ? "https://i.imgur.com/6VBx3io.png"
