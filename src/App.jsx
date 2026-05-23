@@ -166,16 +166,5 @@ Vai sentir que não estamos sós`
     cursor: "pointer",
     marginLeft: "10px"
   }}
->
-  ▶ Ouvir prévia
+ ▶ Ouvir prévia
 </button>
-
-const campo = {
-  padding: "15px",
-  borderRadius: "12px",
-  border: "none",
-  margin: "10px",
-  width: "320px"
-};
-
-export default App;
