@@ -3,23 +3,19 @@ import { useState } from "react";
 function App() {
   const [nome, setNome] = useState("");
   const [tema, setTema] = useState("");
+  const [genero, setGenero] = useState("Feminino");
   const [estilo, setEstilo] = useState("Gospel");
   const [resultado, setResultado] = useState("");
 
-const imagem =
-  estilo === "Gospel"
-    ? "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800"
-    : estilo === "Trap"
-    ? "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800"
-    : estilo === "Pop"
-    ? "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=800"
-    : estilo === "Funk"
-    ? "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800"
-    : "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800";
+  const imagem =
+    genero === "Feminino"
+      ? "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800"
+      : "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800";
 
   function criar() {
     setResultado(
       "🎤 Artista: " + nome +
+      "\n👤 Gênero: " + genero +
       "\n🎵 Tema: " + tema +
       "\n🎶 Estilo: " + estilo +
       "\n✅ Música criada com sucesso!"
@@ -35,14 +31,19 @@ const imagem =
       fontFamily: "Arial",
       textAlign: "center"
     }}>
-      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}
-        >🎵 MusicAI Studio 2.0</h1>
+      <h1 style={{ color: "#ff2d78", fontSize: "52px" }}>🎵 MusicAI Studio 2.0</h1>
       <p>Crie personagens e músicas com IA</p>
 
       <input placeholder="Nome do personagem" value={nome} onChange={(e) => setNome(e.target.value)} style={campo} />
       <br />
 
       <input placeholder="Tema da música" value={tema} onChange={(e) => setTema(e.target.value)} style={campo} />
+      <br />
+
+      <select value={genero} onChange={(e) => setGenero(e.target.value)} style={campo}>
+        <option>Feminino</option>
+        <option>Masculino</option>
+      </select>
       <br />
 
       <select value={estilo} onChange={(e) => setEstilo(e.target.value)} style={campo}>
