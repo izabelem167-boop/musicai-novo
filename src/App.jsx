@@ -38,7 +38,7 @@ function App() {
         placeholder="Nome do personagem"
         value={nome}
         onChange={(e) => setNome(e.target.value)}
-        style={{ padding: "15px", borderRadius: "12px", border: "none", margin: "10px", width: "280px" }}
+        style={{ padding: "15px", borderRadius: "12px", border: "none", margin: "10px", width:  "320px" }}
       />
 
       <br />
