@@ -140,7 +140,8 @@ function App() {
             lineHeight: "1.8",
             fontSize: "16px"
           }}>
-            {resultado}
+            {resultado}<
+          /pre>
          <div
   style={{
     background: "linear-gradient(135deg,#1a1a1a,#2d0036)",
