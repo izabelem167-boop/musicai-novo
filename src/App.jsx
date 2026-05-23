@@ -42,7 +42,21 @@ function App() {
       />
 
       <br />
-
+<select
+  style={{
+    padding: "15px",
+    borderRadius: "12px",
+    border: "none",
+    margin: "10px",
+    width: "280px"
+  }}
+>
+  <option>Gospel</option>
+  <option>Trap</option>
+  <option>Pop</option>
+  <option>Funk</option>
+  <option>Sertanejo</option>
+</select>
       <input
         placeholder="Tema da música"
         value={tema}
