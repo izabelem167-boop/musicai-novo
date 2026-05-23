@@ -5,19 +5,18 @@ function App() {
   const [tema, setTema] = useState("");
   const [resultado, setResultado] = useState("");
 
-  function criar() {
-    if (!nome || !tema) {
-      alert("Preencha o nome e o tema.");
-      return;
-    }
+ function criar() {
+  setResultado(`
+🎤 Artista: ${nome}
 
-    setResultado(
-      "🎭 Personagem IA: " + nome +
-      "\n🎵 Música sobre: " + tema +
-      "\n\n[Refrão]\n" +
-      tema + ", luz no meu coração\nVai nascer uma nova canção 🎶"
-    );
-  }
+🎵 Estilo: Gospel
+
+✨ Tema: ${tema}
+
+📝 Música criada com sucesso!
+`)
+}
+    
 
   return (
     <div style={{
