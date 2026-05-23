@@ -8,9 +8,10 @@ function App() {
   const [resultado, setResultado] = useState("");
 
   const imagem =
-    genero === "Feminino"
-      ? "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800"
-      : "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800";
+ const imagem =
+  genero === "Feminino"
+    ? "https://i.imgur.com/6VBx3io.png"
+    : "https://i.imgur.com/9XndQ5x.png";
 
   function criar() {
     if (!nome || !tema) {
