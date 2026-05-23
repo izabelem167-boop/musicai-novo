@@ -154,23 +154,21 @@ Vai sentir que não estamos sós`
           }}>
             {resultado}
           </pre>
-
-          <button onClick={copiar} style={{
-            background: "white",
-            color: "#111",
-            border: "none",
-            padding: "12px 20px",
-            borderRadius: "12px",
-            fontWeight: "bold",
-            cursor: "pointer"
-          }}>
-            📋 Copiar resultado
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
+<button
+  onClick={() => alert("🎧 Prévia de áudio em breve!")}
+  style={{
+    background: "#ff2d78",
+    color: "white",
+    border: "none",
+    padding: "12px 20px",
+    borderRadius: "12px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    marginLeft: "10px"
+  }}
+>
+  ▶ Ouvir prévia
+</button>
 
 const campo = {
   padding: "15px",
