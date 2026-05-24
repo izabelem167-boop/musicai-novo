@@ -147,7 +147,7 @@ Vai sentir que não estamos sós`
   </p>
 </div>
 
-😄🚀      
+      
 
 <div style={styles.musicPlayer}>
   <div style={styles.playButton}>
