@@ -145,7 +145,7 @@ Vai sentir que não estamos sós`
   <p style={styles.listeners}>
     🎧 1.2M ouvintes mensais
   </p>
-     </div>
+</div>
 
 😄🚀      
 </div>s.artistName}>🎤 {nome}</h2>
