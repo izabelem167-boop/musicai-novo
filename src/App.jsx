@@ -9,7 +9,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const artigo = genero === "Feminino" ? "uma" : "um";
-
+const criado = genero === "Feminino" ? "criada" : "criado";
   const imagem =
     genero === "Feminino"
       ? "https://randomuser.me/api/portraits/women/44.jpg"
@@ -33,7 +33,7 @@ function App() {
 ✨ Tema principal: ${tema}
 
 📖 Biografia:
-${nome} é ${artigo} artista virtual criado com inteligência artificial para emocionar, inspirar e criar músicas únicas. Seu estilo mistura ${estilo} com uma presença marcante, perfeita para vídeos, redes sociais e conteúdos virais.
+${nome} é ${artigo} artista virtual ${criado} com inteligência artificial para emocionar, inspirar e criar músicas únicas. Seu estilo mistura ${estilo} com uma presença marcante, perfeita para vídeos, redes sociais e conteúdos virais.
 
 🎶 Música: ${tema}
 
