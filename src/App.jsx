@@ -126,8 +126,29 @@ Vai sentir que não estamos sós`
         <div style={styles.resultCard}>
           <img src={imagem} alt="" style={styles.avatar} />
 
-          <div style={styles.artistHeader}>
-            <h2 style={styles.artistName}>🎤 {nome}</h2>
+          
+         <div style={styles.artistHeader}>
+  <div style={styles.verifiedRow}>
+    <h2 style={styles.artistName}>
+      🎤 {nome.toUpperCase()}
+    </h2>
+
+    <div style={styles.verifiedBadge}>
+      ✔ Verified Artist
+    </div>
+  </div>
+
+  <p style={styles.artistMeta}>
+    {genero} · {estilo} · IA Artist
+  </p>
+
+  <p style={styles.listeners}>
+    🎧 1.2M ouvintes mensais
+  </p>
+     </div>
+
+😄🚀      
+</div>s.artistName}>🎤 {nome}</h2>
             <p style={styles.artistMeta}>
               {genero} · {estilo} · IA Artist
             </p>
