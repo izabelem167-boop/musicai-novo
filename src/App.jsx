@@ -148,11 +148,7 @@ Vai sentir que não estamos sós`
 </div>
 
 😄🚀      
-</div>s.artistName}>🎤 {nome}</h2>
-            <p style={styles.artistMeta}>
-              {genero} · {estilo} · IA Artist
-            </p>
-          </div>
+
 <div style={styles.musicPlayer}>
   <div style={styles.playButton}>
     ▶
