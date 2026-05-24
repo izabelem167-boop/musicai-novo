@@ -132,7 +132,29 @@ Vai sentir que não estamos sós`
               {genero} · {estilo} · IA Artist
             </p>
           </div>
+<div style={styles.musicPlayer}>
+  <div style={styles.playButton}>
+    ▶
+  </div>
 
+  <div style={{ flex: 1 }}>
+    <div style={styles.songTitle}>
+      {tema}
+    </div>
+
+    <div style={styles.songArtist}>
+      {nome} • {estilo}
+    </div>
+
+    <div style={styles.progressBar}>
+      <div style={styles.progress}></div>
+    </div>
+
+    <div style={styles.time}>
+      0:32 / 2:14
+    </div>
+  </div>
+</div>
           <pre style={styles.resultText}>{resultado}</pre>
 
           <div style={styles.actions}>
