@@ -118,7 +118,7 @@ Vai nascer uma nova canção 🎶`
           <button onClick={fazerLogin} style={styles.createButton}>
             Entrar
           </button>
-          <p style={styles.free}>✨ 1 teste grátis | VIP €4,99/mês</p>
+          <p style={styles.free}>✨ 1 teste grátis | VIP €9,90/mês</p>
         </div>
       </div>
     );
