@@ -1,12 +1,10 @@
 import Stripe from 'stripe';
+import { createClient } from '@supabase/supabase-js';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const config = { api: { bodyParser: false } };
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 async function buffer(readable) {
   const chunks = [];
@@ -31,8 +29,13 @@ export default async function handler(req, res) {
 
   if (event.type === 'checkout.session.completed') {
     const email = event.data.object.customer_details.email;
-    console.log('PAGAMENTO CONFIRMADO:', email);
-    // Depois salvamos esse email como VIP no banco
+    
+    const { error } = await supabase
+      .from('usuarios_vip')
+      .insert([{ email: email }]);
+      
+    if (error) console.log('Erro ao salvar VIP:', error);
+    else console.log('VIP SALVO:', email);
   }
 
   res.json({ received: true });
