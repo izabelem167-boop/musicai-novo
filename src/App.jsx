@@ -1,17 +1,27 @@
-create table songs (
-  id uuid default gen_random_uuid() primary key,
-  user_id uuid references auth.users(id),
-  prompt text,
-  style text,
-  audio_url text,
-  personagem text,
-  created_at timestamp default now()
-);
-
-alter table songs enable row level security;
-
-create policy "users can see own songs"
-on songs for select using (auth.uid() = user_id);
-
-create policy "users can insert own songs"
-on songs for insert with check (auth.uid() = user_id);
+{
+  "name": "musicai-novo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5"
+  }
+}
