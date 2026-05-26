@@ -1,6 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL, 
+  import.meta.env.VITE_SUPABASE_KEY
+);
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [logado, setLogado] = useState(false);
+  const [isVip, setIsVip] = useState(false);
+  const [usosGratis, setUsosGratis] = useState(0);
+  const [checando, setChecando] = useState(false);
+  
   const [nome, setNome] = useState("");
   const [tema, setTema] = useState("");
   const [genero, setGenero] = useState("Feminino");
@@ -8,18 +20,54 @@ function App() {
   const [resultado, setResultado] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const emailSalvo = localStorage.getItem('email');
+    if (emailSalvo) {
+      setEmail(emailSalvo);
+      setLogado(true);
+      checarVip(emailSalvo);
+    }
+    setUsosGratis(Number(localStorage.getItem('usosGratis') || 0));
+  }, []);
+
+  async function checarVip(emailUser) {
+    setChecando(true);
+    const { data } = await supabase
+      .from('usuarios_vip')
+      .select('email')
+      .eq('email', emailUser)
+      .single();
+    
+    if (data) setIsVip(true);
+    setChecando(false);
+  }
+
+  function fazerLogin() {
+    if (!email.includes('@')) return alert("Digite um email válido");
+    localStorage.setItem('email', email);
+    setLogado(true);
+    checarVip(email);
+  }
+
+  function sair() {
+    localStorage.removeItem('email');
+    location.reload();
+  }
+
   const artigo = genero === "Feminino" ? "uma" : "um";
   const criado = genero === "Feminino" ? "criada" : "criado";
-  const imagem =
-    genero === "Feminino"
-      ? "https://randomuser.me/api/portraits/women/44.jpg"
-      : "https://randomuser.me/api/portraits/men/32.jpg";
+  const imagem = genero === "Feminino"
+    ? "https://randomuser.me/api/portraits/women/44.jpg"
+    : "https://randomuser.me/api/portraits/men/32.jpg";
 
   function criarArtista() {
-    if (!nome || !tema || !genero || !estilo) {
-      alert("Preencha todos os campos.");
+    if (!isVip && usosGratis >= 1) {
+      alert("Você usou seu teste grátis. Vire VIP por €4,99 para criar ilimitado!");
+      window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00");
       return;
     }
+
+    if (!nome || !tema) return alert("Preencha nome e tema.");
 
     setLoading(true);
     setResultado("");
@@ -37,140 +85,88 @@ ${nome} é ${artigo} artista virtual ${criado} com inteligência artificial para
 
 🎶 Música: ${tema}
 
-[Verso 1]
-No silêncio eu encontrei
-Uma força pra seguir
-Cada sonho que guardei
-Hoje volta a existir
-
-[Pré-refrão]
-Mesmo quando a noite vem
-Eu não vou desanimar
-Existe uma luz em mim
-Que nasceu para brilhar
-
 [Refrão]
 ${tema}, luz no meu coração
 ${tema}, minha inspiração
 Com estilo ${estilo}
-Vai nascer uma nova canção 🎶
-
-[Final]
-E quando o mundo ouvir minha voz
-Vai sentir que não estamos sós`
+Vai nascer uma nova canção 🎶`
       );
-
+      
+      if (!isVip) {
+        const novoUso = usosGratis + 1;
+        setUsosGratis(novoUso);
+        localStorage.setItem('usosGratis', novoUso);
+      }
+      
       setLoading(false);
     }, 1200);
   }
 
-  function copiarResultado() {
-    navigator.clipboard.writeText(resultado);
-    alert("Resultado copiado!");
+  if (!logado) {
+    return (
+      <div style={styles.page}>
+        <div style={styles.loginCard}>
+          <h1 style={styles.title}>🎵 MusicAI Studio Pro</h1>
+          <p style={styles.subtitle}>Digite seu email para começar</p>
+          <input
+            type="email"
+            placeholder="seu@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={styles.input}
+          />
+          <button onClick={fazerLogin} style={styles.createButton}>
+            Entrar
+          </button>
+          <p style={styles.free}>✨ 1 teste grátis | VIP €4,99/mês</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div style={styles.page}>
       <div style={styles.hero}>
-        <div style={styles.badge}>✨ Plataforma IA para criadores</div>
-
+        <div style={styles.badge}>
+          {checando ? "Verificando..." : isVip ? "👑 VIP Ativo" : `✨ ${1 - usosGratis} teste grátis`}
+        </div>
         <h1 style={styles.title}>🎵 MusicAI Studio Pro</h1>
-
         <p style={styles.subtitle}>
-          Crie artistas virtuais, personagens e músicas com inteligência artificial em segundos.
+          {email} <button onClick={sair} style={styles.logout}>Sair</button>
         </p>
-
-        <button
-          onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")}
-          style={styles.vipButton}
-        >
-          🚀 Criar artista VIP — 4,99€
-        </button>
+        
+        {!isVip && !checando && (
+          <button
+            onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")}
+            style={styles.vipButton}
+          >
+            🚀 Virar VIP — 4,99€ /mês
+          </button>
+        )}
       </div>
 
       <div style={styles.formCard}>
-        <input
-          placeholder="Nome do personagem"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          style={styles.input}
-        />
-
-        <input
-          placeholder="Tema da música"
-          value={tema}
-          onChange={(e) => setTema(e.target.value)}
-          style={styles.input}
-        />
-
+        <input placeholder="Nome do personagem" value={nome} onChange={(e) => setNome(e.target.value)} style={styles.input} />
+        <input placeholder="Tema da música" value={tema} onChange={(e) => setTema(e.target.value)} style={styles.input} />
         <select value={genero} onChange={(e) => setGenero(e.target.value)} style={styles.input}>
-          <option>Feminino</option>
-          <option>Masculino</option>
+          <option>Feminino</option><option>Masculino</option>
         </select>
-
         <select value={estilo} onChange={(e) => setEstilo(e.target.value)} style={styles.input}>
-          <option>Gospel</option>
-          <option>Pop</option>
-          <option>Trap</option>
-          <option>Funk</option>
-          <option>Sertanejo</option>
-          <option>TikTok Viral</option>
+          <option>Gospel</option><option>Pop</option><option>Trap</option>
+          <option>Funk</option><option>Sertanejo</option><option>TikTok Viral</option>
         </select>
-
         <button onClick={criarArtista} style={styles.createButton}>
-          {loading ? "⏳ Criando artista..." : "✨ Criar artista IA"}
+          {loading ? "⏳ Criando..." : isVip ? "✨ Criar artista VIP" : "✨ Criar artista"}
         </button>
       </div>
 
       {resultado && (
         <div style={styles.resultCard}>
           <img src={imagem} alt="" style={styles.avatar} />
-
-          <div style={styles.artistHeader}>
-            <div style={styles.verifiedRow}>
-              <h2 style={styles.artistName}>
-                🎤 {nome.toUpperCase()}
-              </h2>
-              <div style={styles.verifiedBadge}>
-                ✔ Verified Artist
-              </div>
-            </div>
-
-            <p style={styles.artistMeta}>
-              {genero} · {estilo} · IA Artist
-            </p>
-
-            <p style={styles.listeners}>
-              🎧 1.2M ouvintes mensais
-            </p>
-          </div>
-
-          <div style={styles.musicPlayer}>
-            <div style={styles.playButton}>▶</div>
-
-            <div style={{ flex: 1 }}>
-              <div style={styles.songTitle}>{tema}</div>
-              <div style={styles.songArtist}>{nome} • {estilo}</div>
-              <div style={styles.progressBar}>
-                <div style={styles.progress}></div>
-              </div>
-              <div style={styles.time}>0:32 / 2:14</div>
-            </div>
-          </div>
-
           <pre style={styles.resultText}>{resultado}</pre>
-
-          <div style={styles.actions}>
-            <button onClick={copiarResultado} style={styles.copyButton}>
-              📋 Copiar resultado
-            </button>
-            <button
-              onClick={() => alert("🎧 Prévia de áudio em breve!")}
-              style={styles.previewButton}
-            >
-              ▶ Ouvir prévia
-            </button>
-          </div>
+          <button onClick={() => {navigator.clipboard.writeText(resultado); alert("Copiado!")}} style={styles.copyButton}>
+            📋 Copiar resultado
+          </button>
         </div>
       )}
     </div>
@@ -178,200 +174,19 @@ Vai sentir que não estamos sós`
 }
 
 const styles = {
-  page: {
-    minHeight: "100vh",
-    background: "radial-gradient(circle at top, #3b0050 0%, #090909 65%)",
-    color: "white",
-    fontFamily: "Arial, sans-serif",
-    padding: "30px",
-    textAlign: "center"
-  },
-  hero: {
-    maxWidth: "850px",
-    margin: "0 auto 30px"
-  },
-  badge: {
-    display: "inline-block",
-    background: "rgba(255,255,255,0.1)",
-    border: "1px solid rgba(255,255,255,0.15)",
-    padding: "8px 14px",
-    borderRadius: "999px",
-    fontSize: "14px",
-    marginBottom: "15px"
-  },
-  title: {
-    color: "#ff2d78",
-    fontSize: "52px",
-    margin: "10px 0"
-  },
-  subtitle: {
-    color: "#ddd",
-    fontSize: "18px",
-    lineHeight: "1.6"
-  },
-  vipButton: {
-    background: "#ffd700",
-    color: "#111",
-    border: "none",
-    padding: "14px 24px",
-    borderRadius: "14px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    marginTop: "18px",
-    fontSize: "16px"
-  },
-  formCard: {
-    background: "rgba(255,255,255,0.08)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    padding: "25px",
-    borderRadius: "24px",
-    maxWidth: "430px",
-    margin: "0 auto",
-    boxShadow: "0 0 30px rgba(255,45,120,0.18)"
-  },
-  input: {
-    width: "100%",
-    padding: "15px",
-    borderRadius: "14px",
-    border: "none",
-    marginBottom: "14px",
-    fontSize: "15px",
-    boxSizing: "border-box"
-  },
-  createButton: {
-    width: "100%",
-    background: "#ff2d78",
-    color: "white",
-    border: "none",
-    padding: "16px 28px",
-    borderRadius: "14px",
-    fontSize: "18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    boxShadow: "0 0 25px rgba(255,45,120,0.5)"
-  },
-  resultCard: {
-    marginTop: "35px",
-    background: "rgba(255,255,255,0.1)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    padding: "30px",
-    borderRadius: "28px",
-    maxWidth: "820px",
-    marginInline: "auto",
-    boxShadow: "0 0 35px rgba(255,45,120,0.18)"
-  },
-  avatar: {
-    width: "190px",
-    height: "190px",
-    objectFit: "cover",
-    borderRadius: "24px",
-    marginBottom: "20px",
-    boxShadow: "0 0 30px rgba(255,255,255,0.25)"
-  },
-  artistHeader: {
-    marginBottom: "20px"
-  },
-  verifiedRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "10px"
-  },
-  artistName: {
-    color: "#ff2d78",
-    marginBottom: "5px"
-  },
-  verifiedBadge: {
-    background: "#1DA1F2",
-    padding: "4px 8px",
-    borderRadius: "6px",
-    fontSize: "12px"
-  },
-  artistMeta: {
-    color: "#ddd"
-  },
-  listeners: {
-    color: "#aaa",
-    fontSize: "14px"
-  },
-  musicPlayer: {
-    background: "rgba(0,0,0,0.3)",
-    padding: "15px",
-    borderRadius: "12px",
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
-    marginBottom: "20px"
-  },
-  playButton: {
-    width: "40px",
-    height: "40px",
-    background: "#ff2d78",
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  songTitle: {
-    textAlign: "left",
-    fontWeight: "bold"
-  },
-  songArtist: {
-    textAlign: "left",
-    fontSize: "14px",
-    color: "#aaa"
-  },
-  progressBar: {
-    background: "#444",
-    height: "4px",
-    borderRadius: "2px",
-    margin: "8px 0"
-  },
-  progress: {
-    background: "#ff2d78",
-    width: "25%",
-    height: "100%",
-    borderRadius: "2px"
-  },
-  time: {
-    textAlign: "left",
-    fontSize: "12px",
-    color: "#aaa"
-  },
-  resultText: {
-    whiteSpace: "pre-wrap",
-    textAlign: "left",
-    lineHeight: "1.8",
-    fontSize: "16px",
-    background: "rgba(0,0,0,0.25)",
-    padding: "20px",
-    borderRadius: "18px"
-  },
-  actions: {
-    marginTop: "20px",
-    display: "flex",
-    gap: "12px",
-    justifyContent: "center",
-    flexWrap: "wrap"
-  },
-  copyButton: {
-    background: "white",
-    color: "#111",
-    border: "none",
-    padding: "12px 20px",
-    borderRadius: "12px",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  previewButton: {
-    background: "#ff2d78",
-    color: "white",
-    border: "none",
-    padding: "12px 20px",
-    borderRadius: "12px",
-    fontWeight: "bold",
-    cursor: "pointer"
-  }
-};
-
-export default App;
+  page: { minHeight: "100vh", background: "radial-gradient(circle at top, #3b0050 0%, #090909 65%)", color: "white", fontFamily: "Arial, sans-serif", padding: "30px", textAlign: "center" },
+  loginCard: { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "40px", borderRadius: "24px", maxWidth: "400px", margin: "100px auto" },
+  hero: { maxWidth: "850px", margin: "0 auto 30px" },
+  badge: { display: "inline-block", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", padding: "8px 14px", borderRadius: "999px", fontSize: "14px", marginBottom: "15px" },
+  title: { color: "#ff2d78", fontSize: "52px", margin: "10px 0" },
+  subtitle: { color: "#ddd", fontSize: "18px" },
+  logout: { background: "none", border: "none", color: "#ff2d78", cursor: "pointer", marginLeft: "10px", fontSize: "14px" },
+  free: { color: "#aaa", fontSize: "13px", marginTop: "15px" },
+  vipButton: { background: "#ffd700", color: "#111", border: "none", padding: "14px 24px", borderRadius: "14px", fontWeight: "bold", cursor: "pointer", marginTop: "18px", fontSize: "16px" },
+  formCard: { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "25px", borderRadius: "24px", maxWidth: "430px", margin: "0 auto" },
+  input: { width: "100%", padding: "15px", borderRadius: "14px", border: "none", marginBottom: "14px", fontSize: "15px", boxSizing: "border-box" },
+  createButton: { width: "100%", background: "#ff2d78", color: "white", border: "none", padding: "16px 28px", borderRadius: "14px", fontSize: "18px", fontWeight: "bold", cursor: "pointer" },
+  resultCard: { marginTop: "35px", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.12)", padding: "30px", borderRadius: "28px", maxWidth: "820px", marginInline: "auto" },
+  avatar: { width: "190px", height: "190px", objectFit: "cover", borderRadius: "24px", marginBottom: "20px" },
+  resultText: { whiteSpace: "pre-wrap", textAlign: "left", lineHeight: "1.8", fontSize: "16px", background: "rgba(0,0,0,0.25)", padding: "20px", borderRadius: "18px" },
+  copyButton: { background: "white", color
