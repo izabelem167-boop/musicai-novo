@@ -81,7 +81,7 @@ function App() {
 ✨ Tema principal: ${tema}
 
 📖 Biografia:
-${nome} é ${artigo} artista virtual ${criado} com inteligência artificial para emocionar, inspirar e criar músicas únicas. Seu estilo mistura ${estilo} com uma presença marcante, perfeita para vídeos, redes sociais e conteúdos virais.
+${nome} é ${artigo} artista virtual ${criado} com inteligência artificial para emocionar, inspirar e criar músicas únicas.
 
 🎶 Música: ${tema}
 
@@ -115,4 +115,81 @@ Vai nascer uma nova canção 🎶`
             onChange={(e) => setEmail(e.target.value)}
             style={styles.input}
           />
+          <button onClick={fazerLogin} style={styles.createButton}>
+            Entrar
+          </button>
+          <p style={styles.free}>✨ 1 teste grátis | VIP €4,99/mês</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={styles.page}>
+      <div style={styles.hero}>
+        <div style={styles.badge}>
+          {checando ? "Verificando..." : isVip ? "👑 VIP Ativo" : `✨ ${1 - usosGratis} teste grátis`}
+        </div>
+        <h1 style={styles.title}>🎵 MusicAI Studio Pro</h1>
+        <p style={styles.subtitle}>
+          {email} <button onClick={sair} style={styles.logout}>Sair</button>
+        </p>
+        
+        {!isVip && !checando && (
           <button
+            onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")}
+            style={styles.vipButton}
+          >
+            🚀 Virar VIP — 4,99€ /mês
+          </button>
+        )}
+      </div>
+
+      <div style={styles.formCard}>
+        <input placeholder="Nome do personagem" value={nome} onChange={(e) => setNome(e.target.value)} style={styles.input} />
+        <input placeholder="Tema da música" value={tema} onChange={(e) => setTema(e.target.value)} style={styles.input} />
+        <select value={genero} onChange={(e) => setGenero(e.target.value)} style={styles.input}>
+          <option>Feminino</option><option>Masculino</option>
+        </select>
+        <select value={estilo} onChange={(e) => setEstilo(e.target.value)} style={styles.input}>
+          <option>Gospel</option><option>Pop</option><option>Trap</option>
+          <option>Funk</option><option>Sertanejo</option><option>TikTok Viral</option>
+        </select>
+        <button onClick={criarArtista} style={styles.createButton}>
+          {loading ? "⏳ Criando..." : isVip ? "✨ Criar artista VIP" : "✨ Criar artista"}
+        </button>
+      </div>
+
+      {resultado && (
+        <div style={styles.resultCard}>
+          <img src={imagem} alt="" style={styles.avatar} />
+          <pre style={styles.resultText}>{resultado}</pre>
+          <button onClick={() => {navigator.clipboard.writeText(resultado); alert("Copiado!")}} style={styles.copyButton}>
+            📋 Copiar resultado
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  page: { minHeight: "100vh", background: "radial-gradient(circle at top, #3b0050 0%, #090909 65%)", color: "white", fontFamily: "Arial, sans-serif", padding: "30px", textAlign: "center" },
+  loginCard: { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "40px", borderRadius: "24px", maxWidth: "400px", margin: "100px auto" },
+  hero: { maxWidth: "850px", margin: "0 auto 30px" },
+  badge: { display: "inline-block", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", padding: "8px 14px", borderRadius: "999px", fontSize: "14px", marginBottom: "15px" },
+  title: { color: "#ff2d78", fontSize: "52px", margin: "10px 0" },
+  subtitle: { color: "#ddd", fontSize: "18px" },
+  logout: { background: "none", border: "none", color: "#ff2d78", cursor: "pointer", marginLeft: "10px", fontSize: "14px" },
+  free: { color: "#aaa", fontSize: "13px", marginTop: "15px" },
+  vipButton: { background: "#ffd700", color: "#111", border: "none", padding: "14px 24px", borderRadius: "14px", fontWeight: "bold", cursor: "pointer", marginTop: "18px", fontSize: "16px" },
+  formCard: { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "25px", borderRadius: "24px", maxWidth: "430px", margin: "0 auto" },
+  input: { width: "100%", padding: "15px", borderRadius: "14px", border: "none", marginBottom: "14px", fontSize: "15px", boxSizing: "border-box" },
+  createButton: { width: "100%", background: "#ff2d78", color: "white", border: "none", padding: "16px 28px", borderRadius: "14px", fontSize: "18px", fontWeight: "bold", cursor: "pointer" },
+  resultCard: { marginTop: "35px", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.12)", padding: "30px", borderRadius: "28px", maxWidth: "820px", marginInline: "auto" },
+  avatar: { width: "190px", height: "190px", objectFit: "cover", borderRadius: "24px", marginBottom: "20px" },
+  resultText: { whiteSpace: "pre-wrap", textAlign: "left", lineHeight: "1.8", fontSize: "16px", background: "rgba(0,0,0,0.25)", padding: "20px", borderRadius: "18px" },
+  copyButton: { background: "white", color: "#111", border: "none", padding: "12px 20px", borderRadius: "12px", fontWeight: "bold", cursor: "pointer", marginTop: "20px" }
+};
+
+export default App;
