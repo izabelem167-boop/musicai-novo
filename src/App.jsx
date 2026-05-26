@@ -115,27 +115,4 @@ Vai nascer uma nova canção 🎶`
             onChange={(e) => setEmail(e.target.value)}
             style={styles.input}
           />
-          <button onClick={fazerLogin} style={styles.createButton}>
-            Entrar
-          </button>
-          <p style={styles.free}>✨ 1 teste grátis | VIP €4,99/mês</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div style={styles.page}>
-      <div style={styles.hero}>
-        <div style={styles.badge}>
-          {checando ? "Verificando..." : isVip ? "👑 VIP Ativo" : `✨ ${1 - usosGratis} teste grátis`}
-        </div>
-        <h1 style={styles.title}>🎵 MusicAI Studio Pro</h1>
-        <p style={styles.subtitle}>
-          {email} <button onClick={sair} style={styles.logout}>Sair</button>
-        </p>
-        
-        {!isVip && !checando && (
           <button
-            onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")}
-            style={styles.vip
