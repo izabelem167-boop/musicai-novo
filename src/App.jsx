@@ -62,7 +62,7 @@ function App() {
 
   function criarArtista() {
     if (!isVip && usosGratis >= 1) {
-      alert("Você usou seu teste grátis. Vire VIP por €4,99 para criar ilimitado!");
+      alert("Você usou seu teste grátis. Vire VIP por €9,90 para criar ilimitado!");
       window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00");
       return;
     }
