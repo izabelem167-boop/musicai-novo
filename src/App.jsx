@@ -102,7 +102,4 @@ function App() {
           <stripe-pricing-table
             pricing-table-id="prctbl_1Tb0Y1NbetB6aDzhk1hbn0"
             publishable-key="pk_live_51Tzch1N
-[17:25, 27/05/2026] izabelem167: import { useState, useEffect } from "react";
 
-// TEMPORÁRIO - sem Supabase para testar
-const supabase = { from: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null }) }) }) }) };
