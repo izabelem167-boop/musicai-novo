@@ -1,5 +1,4 @@
-[17:20, 27/05/2026] izabelem167: import { useState, useEffect } from "react";
-import { createClient } from '@supabase/supabase-js';
+
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
