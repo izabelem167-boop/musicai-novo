@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-function App() {
-  const [logado, setLogado] = useState(false);
+export default function App() {
   const [email, setEmail] = useState("");
+  const [logado, setLogado] = useState(false);
 
   useEffect(() => {
     if (!document.querySelector('script[src="https://js.stripe.com/v3/pricing-table.js"]')) {
@@ -38,9 +38,7 @@ function App() {
 
   return (
     <div style={{minHeight:"100vh",background:"#0a0a0a",color:"white",padding:40,fontFamily:"Arial"}}>
-      <h1 style={{color:"#ff2d78",textAlign:"center"}}>Funcionou!</h1>
-      <p style={{textAlign:"center"}}>Se estás a ver isto, o site está OK.</p>
-      
+      <h1 style={{color:"#ff2d78",textAlign:"center"}}>FUNCIONOU!</h1>
       <div style={{maxWidth:900,margin:"40px auto"}}>
         <stripe-pricing-table
           pricing-table-id="prctbl_1Tb0Y1NbetB6aDzhk1hbn0"
@@ -50,5 +48,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
