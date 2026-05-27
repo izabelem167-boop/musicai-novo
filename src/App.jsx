@@ -140,7 +140,7 @@ Vai nascer uma nova canção 🎶`
             onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")}
             style={styles.vipButton}
           >
-            🚀 Virar VIP — 4,99€ /mês
+            🚀 Virar VIP — 9,90 /mês
           </button>
         )}
       </div>
