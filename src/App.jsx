@@ -50,7 +50,7 @@ Vai nascer uma nova canção 🎶`);
       <h1 style={{ color: "#ff2d78" }}>🎵 MusicAI Studio Pro</h1>
       <p>Crie artistas virtuais e músicas com IA.</p>
 
-      <button onClick={() =>window.open("https://buy.stripe.com/28E28s1b86xV9Sv86Xe3e02")
+      <button onClick={() =<window.open("https://buy.stripe.com/dRm7sMaLI3lJ1lZgDte3e03")
         🚀 Criar artista VIP — 9,90€
       </button>
 
