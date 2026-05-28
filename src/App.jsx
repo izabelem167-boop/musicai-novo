@@ -51,7 +51,7 @@ Vai nascer uma nova canção 🎶`);
       <p>Crie artistas virtuais e músicas com IA.</p>
 
       <button onClick={() => window.open("https://buy.stripe.com/5kQ5kEcTQe0n3u70Eve3e00")} style={botaoVip}>
-        🚀 Criar artista VIP — 4,99€
+        🚀 Criar artista VIP — 9,90€
       </button>
 
       <div style={card}>
