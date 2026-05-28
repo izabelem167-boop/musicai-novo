@@ -50,7 +50,7 @@ Vai nascer uma nova canção 🎶`);
       <h1 style={{ color: "#ff2d78" }}>🎵 MusicAI Studio Pro</h1>
       <p>Crie artistas virtuais e músicas com IA.</p>
 
-      <button onClick={() =<window.open("https://buy.stripe.com/dRm7sMaLI3lJ1lZgDte3e03")
+      </button>/button> onClick={() =<window.open("https://buy.stripe.com/dRm7sMaLI3lJ1lZgDte3e03")
         🚀 Criar artista VIP — 9,90€
       </button>
 
@@ -72,7 +72,7 @@ Vai nascer uma nova canção 🎶`);
           <option>TikTok Viral</option>
         </select>
 
-        <button onClick={criar} style={botaoCriar}>✨ Criar artista IA</button>
+        <buttononClick={criar} style={botaoCriar}>✨ Criar artista IA</button>
       </div>
 
       {resultado && (
