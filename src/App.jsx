@@ -17,22 +17,31 @@ export default function App() {
   }, []);
 
   async function checkUser() {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      setLogado(true);
-      setEmail(user.email);
-      const { data } = await supabase
-        .from('users')
-        .select('is_vip')
-        .eq('email', user.email)
-        .single();
-      if (data?.is_vip) setIsVip(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setLogado(true);
+        setEmail(user.email);
+        const { data, error } = await supabase
+          .from('users')
+          .select('is_vip')
+          .eq('email', user.email)
+          .single();
+        
+        if (error) console.log('Erro Supabase:', error.message);
+        if (data?.is_vip) setIsVip(true);
+      }
+    } catch (e) {
+      console.log('Erro geral:', e);
     }
     setLoading(false);
   }
 
   async function loginComGoogle() {
-    await supabase.auth.signInWithOAuth({ provider: 'google' });
+    await supabase.auth.signInWithOAuth({ 
+      provider: 'google',
+      options: { redirectTo: window.location.origin }
+    });
   }
 
   async function logout() {
