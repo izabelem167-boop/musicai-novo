@@ -1,7 +1,13 @@
 {
-  "functions": {
-    "api/webhook.js": {
-      "maxDuration": 10
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "font-src 'self' https://k2mkucxia43oc7fa.public.blob.vercel-storage.com *.vercel.com *.gstatic.com vercel.live; default-src 'self' *.supabase.co *.stripe.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com vercel.live; connect-src 'self' *.supabase.co *.stripe.com wss://*.supabase.co"
+        }
+      ]
     }
-  }
+  ]
 }
