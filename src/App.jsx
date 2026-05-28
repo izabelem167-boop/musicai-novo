@@ -89,7 +89,8 @@ export default function App() {
 
       <h2 style={{ marginTop: 40 }}>Suas músicas</h2>
       <p>Ainda não tem nada aqui. Bora gerar a primeira.</p>
-    </div>git add .
+    </div>
+    git add .
 git commit -m "add tela vip"
 git push
   );
