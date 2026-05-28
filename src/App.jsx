@@ -1,3 +1,5 @@
+Aqui está o App.jsx limpo final. Apaga tudo do src/App.jsx e cola isto inteiro:
+JSX
 import { useState } from "react";
 
 function App() {
