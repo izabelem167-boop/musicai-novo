@@ -46,9 +46,9 @@ Vai nascer uma nova canção 🎶`);
         onClick={() =>
           window.open("https://buy.stripe.com/dRm7sMaLI3lJ1lZgDte3e03")
         }
-        style={vip}
+        style={Beta}
       >
-        🚀 Criar artista VIP — 9,90€
+        🚀 Entrar no Beta MusicAI — 2,99€
       </button>
 
       <div style={card}>
