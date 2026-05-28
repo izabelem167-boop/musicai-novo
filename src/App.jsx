@@ -81,7 +81,9 @@ export default function App() {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1>MusicAI Studio ✅ Você é VIP</h1>
         <button onClick={logout}>Sair</button>
-      </div>
+       </div>
+    
+
       
       <h2>Gerar música</h2>
       <input placeholder="Descreva sua música..." style={{ width: '100%', padding: 10 }} />
@@ -90,8 +92,8 @@ export default function App() {
       <h2 style={{ marginTop: 40 }}>Suas músicas</h2>
       <p>Ainda não tem nada aqui. Bora gerar a primeira.</p>
     </div>
-    git add .
-git commit -m "add tela vip"
-git push
+    
+ </div>
+    </div>
   );
 }
